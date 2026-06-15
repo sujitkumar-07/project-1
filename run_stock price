@@ -1,0 +1,28 @@
+# Stock Price Predictor
+
+Simple Python project to predict stock closing prices from historical data.
+
+Features
+- Data download and feature engineering using `yfinance` and `pandas`.
+- Baseline models: `LinearRegression` and `RandomForestRegressor`.
+- Training, evaluation (RMSE, MAE), and model saving.
+
+Quickstart
+
+1. Create a virtual environment and install dependencies:
+
+```bash
+python -m venv venv
+venv\Scripts\activate    # Windows
+pip install -r requirements.txt
+```
+
+2. Train on a ticker (example: AAPL):
+
+```bash
+python -m src.train --ticker AAPL --period 5y --lags 5
+```
+
+Models are saved under `models/` and training/evaluation metrics printed to stdout.
+
+You can adjust model choices and hyperparameters in `src/models.py` and `src/train.py`.
