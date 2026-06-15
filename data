@@ -1,0 +1,35 @@
+import pandas as pd
+import numpy as np
+import yfinance as yf
+
+
+def download_data(ticker: str, period: str = "5y", interval: str = "1d") -> pd.DataFrame:
+    """Download historical OHLCV data for `ticker` using yfinance."""
+    df = yf.download(ticker, period=period, interval=interval, progress=False)
+    if df.empty:
+        raise ValueError(f"No data downloaded for {ticker}")
+    df = df[['Open', 'High', 'Low', 'Close', 'Volume']].copy()
+    df.dropna(inplace=True)
+    return df
+
+
+def create_features(df: pd.DataFrame, lags: int = 5) -> pd.DataFrame:
+    """Create lag features and moving averages; predict next-day Close."""
+    data = df.copy()
+    for lag in range(1, lags + 1):
+        data[f'lag_{lag}'] = data['Close'].shift(lag)
+    data['ma_5'] = data['Close'].rolling(window=5).mean()
+    data['ma_10'] = data['Close'].rolling(window=10).mean()
+    data['vol_5'] = data['Volume'].rolling(window=5).mean()
+    # Target: next day's close
+    data['target'] = data['Close'].shift(-1)
+    data.dropna(inplace=True)
+    return data
+
+
+def train_test_split_timeseries(data: pd.DataFrame, test_size: float = 0.2):
+    n = len(data)
+    split = int(n * (1 - test_size))
+    train = data.iloc[:split].copy()
+    test = data.iloc[split:].copy()
+    return train, test
