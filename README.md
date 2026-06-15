@@ -11,27 +11,34 @@ Helps in understanding market trends, investment risks, and financial forecastin
 Data Collection-
 Gather historical stock data (Open, Close, High, Low, Volume).
 Sources: Yahoo Finance API, Kaggle datasets.
+
 Preprocessing-
 Handle missing values and outliers.
 Normalize/scale data for better model performance.
 Split into training and testing sets.
+
 Feature Engineering-
 Create features like moving averages, daily returns, volatility.
 Use lagged values to capture time-series dependencies.
+
 Model Building-
 Basic: Linear Regression for trend prediction.
 Machine Learning: Random Forest, Support Vector Regression.
 Deep Learning: LSTM (Long Short-Term Memory) networks for sequential data.
+
 Evaluation-
 Metrics: Mean Squared Error (MSE), Root Mean Squared Error (RMSE), R² score.
 Compare actual vs predicted prices using graphs.
+
 Deployment-
 Integrate into dashboards or apps for real-time stock monitoring.
 Allow users to input a stock ticker and get predictions.
+
 Key Highlights-
 Practical Impact: Demonstrates how AI can assist in financial decision-making.
 Scalable: Can expand from simple regression to advanced deep learning models.
 Applications: Investment analysis, portfolio management, financial education.
+
 Output -
 Downloading data for AAPL...
 Available columns: ['Open', 'High', 'Low', 'Close', 'Volume', 'lag_1', 'lag_2',
